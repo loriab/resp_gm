@@ -9,14 +9,16 @@ __copyright__ = "(c) 2014-2018, The Psi4NumPy Developers"
 __license__   = "BSD-3-Clause"
 __date__      = "2018-04-28"
 
-import numpy as np
 import os
-from espfit import *
-from resp_helper import *
+
+import numpy as np
+
+from . import espfit
+from . import helpers
 
 bohr_to_angstrom = 0.52917721092
 
-def resp(molecules, options_list=[], intermol_constraints=None):
+def resp(molecules, options_list=None, intermol_constraints=None):
     """RESP code driver.
 
     Parameters
@@ -55,10 +57,8 @@ def resp(molecules, options_list=[], intermol_constraints=None):
         intermol_constraints['EQUAL'] = []
 
     # Check options for first molecule
-    check_options = {}
-    for i in options_list[0].keys():
-        check_options[i.upper()] = options_list[0][i]
-    options = check_options
+    options = {k.upper(): v for k, v in options_list[0].items()}
+
     # VDW surface options
     if not ('ESP' in options.keys()):
         options['ESP'] = []
@@ -101,10 +101,7 @@ def resp(molecules, options_list=[], intermol_constraints=None):
     n_atoms = []
     symbols_list = []
     for imol in range(len(molecules)):
-        check_options = {}
-        for i in options_list[imol].keys():
-            check_options[i.upper()] = options_list[imol][i]
-        options = check_options
+        options = {k.upper(): v for k, v in options_list[imol].items()}
         # VDW surface options
         if not ('RADIUS' in options.keys()):
             options['RADIUS'] = {}
@@ -147,7 +144,7 @@ def resp(molecules, options_list=[], intermol_constraints=None):
         else:
             # Get the points at which we're going to calculate the ESP surface
             points = []
-            surface = helper_VDW_surface()
+            surface = helpers.vdw_surface()
             for i in range(options['N_VDW_LAYERS']):
                 scale_factor = options['VDW_SCALE_FACTOR'] + i * options['VDW_INCREMENT']
                 surface.vdw_surface(coordinates, symbols, scale_factor,
@@ -187,7 +184,7 @@ def resp(molecules, options_list=[], intermol_constraints=None):
 
         final_options_list.append(options)
     # Calculate charges
-    qf, labelf, notes = fit(final_options_list, intermol_constraints)
+    qf, labelf, notes = espfit.fit(final_options_list, intermol_constraints)
     index = 0
     charges = []
     
