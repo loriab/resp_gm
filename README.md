@@ -1,3 +1,16 @@
+<p align="center">
+<br>
+<a href="https://travis-ci.org/loriab/resp_gm"><img src="https://travis-ci.org/loriab/resp_gm.svg?branch=master"></a>
+<a href="https://codecov.io/gh/loriab/resp_gm"> <img src="https://codecov.io/gh/loriab/resp_gm/branch/master/graph/badge.svg" /></a>
+<a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg" /></a>
+<br>
+<a href="#"> <img src="https://img.shields.io/github/release/loriab/resp_gm.svg" /></a>
+<a href="#"> <img src="https://img.shields.io/github/commits-since/loriab/resp_gm/latest.svg" /></a>
+<a href="#"> <img src="https://img.shields.io/github/release-date/loriab/resp_gm.svg" /></a>
+<a href="#"> <img src="https://img.shields.io/github/commit-activity/y/loriab/resp_gm.svg" /></a>
+<br>
+</p>
+
 Restrained-Electrostatic-Potential
 ==================================
 
