@@ -75,13 +75,13 @@ def restraint(q, akeep, resp_a, resp_b, ihfree, symbols, n_atoms, n_constraints)
     for mol in range(n_mol):
         for i in range(n_atoms[mol]):
             if not ihfree[mol] or symbols[mol][i] != 'H':
-                a[index+i, index+i] = akeep[index+i, index+i]\
-                + resp_a[mol]/np.sqrt(q[index_q]**2 + resp_b[mol]**2)
+                a[index+i, index+i] = (akeep[index+i, index+i]
+                + resp_a[mol]/np.sqrt(q[index_q]**2 + resp_b[mol]**2))
             index_q += 1
         index += n_atoms[mol] + n_constraints[mol]
     return a
 
-def iterate(q, akeep, b, resp_a, resp_b, ihfree, symbols, toler,\
+def iterate(q, akeep, b, resp_a, resp_b, ihfree, symbols, toler,
             maxit, n_atoms, n_constraints, indices):
     """Iterates the RESP fitting procedure
 
@@ -109,7 +109,7 @@ def iterate(q, akeep, b, resp_a, resp_b, ihfree, symbols, toler,\
         list of the number of atoms in each molecule
     n_constraints : list
         list of the number of constraints for each molecule
-    indices : np.array
+    indices : ndarray
         array of the indices for the atoms in the A and B matrices
 
     Returns
@@ -124,7 +124,7 @@ def iterate(q, akeep, b, resp_a, resp_b, ihfree, symbols, toler,\
     while difm > toler and niter < maxit:
         index = 0
         niter += 1
-        a = restraint(q[indices], akeep, resp_a, resp_b, ihfree,\
+        a = restraint(q[indices], akeep, resp_a, resp_b, ihfree,
                       symbols, n_atoms, n_constraints)
         q, note = esp_solve(a, b)
         q_q = q[indices]
