@@ -19,14 +19,22 @@ install:
   # Useful for debugging any issues with conda
   - conda info -a
 
-  - conda create -q -n plugenv python=$PYTHON_VER ci-psi4 psi4 numpy -c psi4/label/dev
-  - source activate plugenv
+  - conda create -q -n tenv python=$PYTHON_VER ci-psi4 psi4 numpy -c psi4/label/dev
+  - source activate tenv
+  - conda install pytest pytest-cov codecov
   - conda list
 
-before_Script:
+before_script:
   - python -V
 
 script:
   - pwd
   - python setup.py install
   - python -c "import resp; print(resp.__version__)"
+  - python -m pytest -rws -v --capture=sys --cov
+
+notifications:
+  email: false
+
+after_success:
+  - codecov
