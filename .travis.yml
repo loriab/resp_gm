@@ -21,7 +21,7 @@ install:
 
   - conda create -q -n tenv python=$PYTHON_VER ci-psi4 psi4 numpy -c psi4/label/dev
   - source activate tenv
-  - conda install pytest pytest-cov codecov
+  - conda install pytest pytest-cov codecov -c conda-forge
   - conda list
 
 before_script:
