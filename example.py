@@ -1,6 +1,6 @@
 import psi4
-import resp_driver
 import numpy as np
+import resp
 
 # Initialize molecule
 mol = psi4.geometry(""" C   1.45051389  -0.06628932   0.00000000
@@ -23,7 +23,7 @@ options = {'N_VDW_LAYERS'       : 4,
            }
 
 # Call for first stage fit
-charges1 = resp_driver.resp([mol], [options])
+charges1 = resp.resp([mol], [options])
 print('Electrostatic Potential Charges')
 print(charges1[0][0])
 print('Restrained Electrostatic Potential Charges')
@@ -53,7 +53,7 @@ options['esp'] = '1_%s_grid_esp.dat' %mol.name()
 mol.set_name('stage2')
 
 # Call for second stage fit
-charges2 = resp_driver.resp([mol], [options])
+charges2 = resp.resp([mol], [options])
 
 # Get RESP charges
 print("\nStage Two:\n")

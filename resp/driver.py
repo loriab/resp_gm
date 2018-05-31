@@ -2,17 +2,11 @@
 Driver for the RESP code.
 """
 
-__authors__   =  "Asim Alenaizan"
-__credits__   =  ["Asim Alenaizan"]
-
-__copyright__ = "(c) 2014-2018, The Psi4NumPy Developers"
-__license__   = "BSD-3-Clause"
-__date__      = "2018-04-28"
-
 import numpy as np
 import os
-from espfit import *
-from resp_helper import *
+
+from . import espfit
+from . import helpers
 
 bohr_to_angstrom = 0.52917721092
 
@@ -144,7 +138,7 @@ def resp(molecules, options_list=[], intermol_constraints={}):
         else:
             # Get the points at which we're going to calculate the ESP surface
             points = []
-            surface = helper_VDW_surface()
+            surface = helpers.helper_VDW_surface()
             for i in range(options['N_VDW_LAYERS']):
                 scale_factor = options['VDW_SCALE_FACTOR'] + i * options['VDW_INCREMENT']
                 surface.vdw_surface(coordinates, symbols, scale_factor,
@@ -184,7 +178,7 @@ def resp(molecules, options_list=[], intermol_constraints={}):
 
         final_options_list.append(options)
     # Calculate charges
-    qf, labelf, notes = fit(final_options_list, intermol_constraints)
+    qf, labelf, notes = espfit.fit(final_options_list, intermol_constraints)
     index = 0
     charges = []
     
