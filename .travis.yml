@@ -31,10 +31,10 @@ script:
   - pwd
   - python setup.py install
   - python -c "import resp; print(resp.__version__)"
-#  - python -m pytest -rws -v --capture=sys --cov
+  - python -m pytest -rws -v --capture=sys --cov
 
 notifications:
   email: false
 
-#after_success:
-#  - codecov
+after_success:
+  - codecov
