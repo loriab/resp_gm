@@ -76,9 +76,9 @@ class helper_stage2(object):
 
         Parameters
         ----------
-        molecule : psi4.Molecule instance
+        molecule : psi4.core.Molecule
 
-        charges : np.array
+        charges : :py:class:`numpy.ndarray`
             array containing the charges from the first stage fit
         options : dict
             dictionary of the fitting options. To be modified in place.

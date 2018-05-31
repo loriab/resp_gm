@@ -12,16 +12,16 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../'))
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'resp'
-copyright = '2018, Asim Alenaizan'
-author = 'Asim Alenaizan'
+copyright = '2018, Asem Alenaizan'
+author = 'Asem Alenaizan'
 
 # The short X.Y version
 version = ''
@@ -39,15 +39,29 @@ release = '0.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    # from Sphinx
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
+    'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
+    'sphinx.ext.extlinks',
+    'sphinx.ext.graphviz',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon',
+    # from Astropy
+    'sphinx_automodapi.automodapi',
+    'sphinx_automodapi.automodsumm',
+    'sphinx_automodapi.smart_resolver',
 ]
 
+autosummary_generate = True
+automodapi_toctreedirnm = 'api'
+
+
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['ytemplates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -134,7 +148,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'resp.tex', 'resp Documentation',
-     'Asim Alenaizan', 'manual'),
+     'Asem Alenaizan', 'manual'),
 ]
 
 
@@ -165,7 +179,12 @@ texinfo_documents = [
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {'python': ('http://docs.python.org/3.6', None),
+                       'numpy': ('http://docs.scipy.org/doc/numpy/', None),
+                       'scipy': ('http://docs.scipy.org/doc/scipy/reference/', None),
+                       'matplotlib': ('http://matplotlib.sourceforge.net/', None),
+                       'psi4.core': ('http://psicode.org/psi4manual/master/', None),
+                      }
 
 # -- Options for todo extension ----------------------------------------------
 
