@@ -6,6 +6,8 @@ setup(
     license='BSD license',
     packages=['resp'],
     install_requires=['numpy'],
+    package_data={'resp': ['tests/*.py'],
+                  },
     zip_safe=False,
     classifiers=[
           "Intended Audience :: Developers",

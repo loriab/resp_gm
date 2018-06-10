@@ -5,7 +5,7 @@
 from __future__ import division, absolute_import, print_function
 
 __authors__ =  "Asim Alenaizan"
-__version__ = '0.1'
+__version__ = '0.6a1'
 __license__ = "BSD-3-Clause"
 __date__    = "2018-04-28"
 
