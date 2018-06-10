@@ -2,7 +2,7 @@ from __future__ import division, absolute_import, print_function
 import pytest
 
 
-def hide_test_resp_1():
+def test_resp_1():
     import psi4
     import resp
     import numpy as np
@@ -144,6 +144,7 @@ def test_resp_2():
     # Add constraint for atoms fixed in second stage fit
     stage2 = resp.stage2_helper()
     for mol in range(len(molecules)):
+        print(mol, charges1[mol][1], options[mol])
         stage2.set_stage2_constraint(molecules[mol], charges1[mol][1], options[mol], cutoff=1.2)
         options[mol]['grid'] = '%i_%s_grid.dat' %(mol+1, molecules[mol].name())
         options[mol]['esp'] = '%i_%s_grid_esp.dat' %(mol+1, molecules[mol].name())
@@ -154,6 +155,9 @@ def test_resp_2():
     stage2.stage2_intermolecular_constraint(molecules, cutoff=1.2)
 
     # Call for second stage fit
+    print(molecules)
+    print(options)
+    print(stage2.intermolecular_constraint)
     charges2 = resp.resp(molecules, options, stage2.intermolecular_constraint)
     print("\nStage Two\n")
     print("RESP Charges")
