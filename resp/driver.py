@@ -19,6 +19,7 @@ from . import vdw_surface_helper
 
 bohr_to_angstrom = 0.52917721092
 
+
 def resp(molecules, options_list=None, intermol_constraints=None):
     """RESP code driver.
 
@@ -58,7 +59,7 @@ def resp(molecules, options_list=None, intermol_constraints=None):
         intermol_constraints['EQUAL'] = []
 
     # Check options for first molecule
-    options = {k.upper(): v for k, v in options_list[0].items()}
+    options = {k.upper(): v for k, v in sorted(options_list[0].items())}
 
     # VDW surface options
     if not ('ESP' in options.keys()):
@@ -189,7 +190,7 @@ def resp(molecules, options_list=None, intermol_constraints=None):
     index = 0
     charges = []
     
-    # Exstract the charges
+    # Extract the charges
     for imol in range(len(molecules)):
         q = [i[index:index+n_atoms[imol]] for i in qf]
         index += n_atoms[imol]
@@ -197,7 +198,7 @@ def resp(molecules, options_list=None, intermol_constraints=None):
 
     for imol in range(len(molecules)):
         options = final_options_list[imol]
-        # Write the resules to disk
+        # Write the results to disk
         with open(str(imol+1) + '_' + molecules[imol].name() + "_results.out", "w") as f:
             f.write("\n Electrostatic potential parameters\n")
             f.write("\n Geometry (see% i_%s.xyz in Angstrom)\n" %(imol+1, molecules[imol].name()))
