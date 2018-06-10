@@ -3,10 +3,13 @@
 """Top-level package for RESP."""
 
 from __future__ import division, absolute_import, print_function
-__author__ = """Asem Alenaizan"""
+
+__authors__ =  "Asim Alenaizan"
 __version__ = '0.1'
+__license__ = "BSD-3-Clause"
+__date__    = "2018-04-28"
 
 from .driver import resp
 from . import espfit
-from . import helpers
-
+from .stage2_helper import stage2_helper
+from .vdw_surface_helper import vdw_surface_helper

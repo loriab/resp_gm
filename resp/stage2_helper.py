@@ -2,7 +2,8 @@ from __future__ import division, absolute_import, print_function
 
 import numpy as np
 
-class stage2(object):
+
+class stage2_helper(object):
     """
     A helper script to facilitate the use of constraints for two-stage fitting.
     """
@@ -13,7 +14,7 @@ class stage2(object):
 
         Parameters
         ----------
-        molecule : psi4.Molecule instance 
+        molecule : psi4.Molecule instance
 
         cutoff : float, optional
             a cutoff distance in Angstroms, exclusive
@@ -24,6 +25,7 @@ class stage2(object):
             a dictionary whose keys are the indecies+1 of carbon
             atoms and whose elements are the indecies+1 of the
             connected hydrogen atoms.
+
         """
         bohr_to_angstrom = 0.52917721092
         coordinates = molecule.geometry()
@@ -40,7 +42,7 @@ class stage2(object):
                    (symbols[j] == 'C' and symbols[i] == 'H'):
                     d = np.linalg.norm(coordinates[i]-coordinates[j])
                     if d < cutoff:
-                        if symbols[i] == 'C': 
+                        if symbols[i] == 'C':
                             if i+1 not in groups.keys():
                                 groups[i+1] = []
                             groups[i+1].append(j+1)
@@ -76,6 +78,7 @@ class stage2(object):
         Return
         ------
         None
+
         """
         second_stage = self._get_stage2_atoms(molecule, cutoff=cutoff)
         atoms = list(range(1, molecule.natom()+1))
@@ -95,7 +98,7 @@ class stage2(object):
 
 
     def stage2_intermolecular_constraint(self, molecules, cutoff=1.2):
-        """Determines the default intermolecular constraint for multi-molecular 
+        """Determines the default intermolecular constraint for multi-molecular
         fit, in the second stage fit.
 
         The default is that the equivalent carbon atoms in the different
@@ -114,7 +117,8 @@ class stage2(object):
         Return
         ------
         intermolecular_constraint : dict
-            a dictionary of intermolecular constraint   
+            a dictionary of intermolecular constraint
+
         """
         inter_constraint = []
         for mol in range(len(molecules)):
@@ -130,5 +134,5 @@ class stage2(object):
         inter = []
         for i in range(1, len(inter_constraint)):
             inter.append([inter_constraint[0], inter_constraint[i]])
-        intermolecular_constraint = {'EQUAL': inter} 
+        intermolecular_constraint = {'EQUAL': inter}
         self.intermolecular_constraint = intermolecular_constraint

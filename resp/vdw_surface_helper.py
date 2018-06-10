@@ -1,5 +1,5 @@
 """
-Helper classes and functions for the RESP program. 
+Helper classes and functions for the RESP program.
 
 Assists in generating van der Waals surface, computing the electrostatic
 potential with Psi4, and adding constraints for two-stage fitting procedure.
@@ -8,12 +8,13 @@ from __future__ import division, absolute_import, print_function
 
 import numpy as np
 
-class vdw_surface(object):
+
+class vdw_surface_helper(object):
     """
     A script to generate van der Waals surface of molecules.
     """
 
-    #Van der Waals radii (in angstrom) are taken from GAMESS.
+    # Van der Waals radii (in angstrom) are taken from GAMESS.
     vdw_r = {'H': 1.20, 'HE': 1.20,
              'LI': 1.37, 'BE': 1.45, 'B': 1.45, 'C': 1.50,
              'N': 1.50, 'O': 1.40, 'F': 1.35, 'NE': 1.30,
@@ -30,10 +31,10 @@ class vdw_surface(object):
 
         Returns
         -------
-        np.array
-            nupmy array of xyz coordinates of surface points
+        ndarray
+            numpy array of xyz coordinates of surface points
         """
-            
+
         u = []
         eps = 1e-10
         nequat = int(np.sqrt(np.pi*n))
@@ -54,14 +55,14 @@ class vdw_surface(object):
                     return np.array(u)
                 nu += 1
                 u.append([x, y, z])
-        return np.array(u) 
+        return np.array(u)
 
     def vdw_surface(self, coordinates, elements, scale_factor, density, input_radii):
-        """Computes points outside the van der Walls' surface of molecules.
+        """Computes points outside the van der Waals surface of molecules.
 
         Parameters
         ----------
-        coordinates : np.array
+        coordinates : ndarray
             cartesian coordinates of the nuclei, in units of angstrom
         elements : list
             The symbols (e.g. C, H) for the atoms
@@ -78,8 +79,9 @@ class vdw_surface(object):
         -------
         radii : dict
             A dictionary of scaled VDW radii
-        surface_points : np.array
+        surface_points : ndarray
             array of the coordinates of the points on the surface
+
         """
         radii = {}
         surface_points = []
@@ -114,4 +116,3 @@ class vdw_surface(object):
                     surface_points.append(dots[j])
         self.radii = radii
         self.shell = np.array(surface_points)
-
