@@ -6,5 +6,3 @@ RESP API
 
 .. automodapi:: resp.espfit
 
-.. automodapi:: resp.helpers
-
