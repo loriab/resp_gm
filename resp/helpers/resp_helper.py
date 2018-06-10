@@ -4,7 +4,7 @@ Helper classes and functions for the RESP program.
 Assists in generating van der Waals surface, computing the electrostatic
 potential with Psi4, and adding constraints for two-stage fitting procedure.
 """
-from __future__ import division
+from __future__ import division, absolute_import, print_function
 
 import numpy as np
 
