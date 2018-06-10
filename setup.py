@@ -5,6 +5,7 @@ setup(
     url='https://github.com/alenaizan/resp',
     license='BSD license',
     packages=['resp'],
+    install_requires=['numpy'],
     zip_safe=False,
     classifiers=[
           "Intended Audience :: Developers",

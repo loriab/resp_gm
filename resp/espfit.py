@@ -78,6 +78,7 @@ def restraint(q, akeep, resp_a, resp_b, ihfree, symbols, n_atoms, n_constraints)
         index += n_atoms[mol] + n_constraints[mol]
     return a
 
+
 def iterate(q, akeep, b, resp_a, resp_b, ihfree, symbols, toler,
             maxit, n_atoms, n_constraints, indices):
     """Iterates the RESP fitting procedure
@@ -139,6 +140,7 @@ def iterate(q, akeep, b, resp_a, resp_b, ihfree, symbols, toler,
                'try increasing the maximum number of iterations to ' +\
                '> %i.' %maxit
     return q_q, note
+
 
 def intramolecular_constraints(constraint_charge, constraint_equal, constraint_groups):
     """Extracts intramolecular constraints from user constraint input

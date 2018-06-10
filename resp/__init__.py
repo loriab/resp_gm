@@ -11,5 +11,6 @@ __date__    = "2018-04-28"
 
 from .driver import resp
 from . import espfit
+from .extras import test
 from .stage2_helper import stage2_helper
 from .vdw_surface_helper import vdw_surface_helper
