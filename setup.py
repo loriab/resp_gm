@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='resp',
-    url='https://github.com/alenaizan/resp',
+    url='https://github.com/cdsgroup/resp',
     license='BSD license',
     packages=['resp'],
     install_requires=['numpy'],
